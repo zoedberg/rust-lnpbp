@@ -84,7 +84,9 @@ num-derive = "~0.3.0"
 async-trait = { version = "~0.1.30", optional = true }
 
 [dev-dependencies]
-miniscript = { version = "~2.0.0", features = ["compiler"] }
+# We fix version of miniscript as required by LNPBP-2 specification
+# <https://github.com/LNP-BP/LNPBPs/blob/master/lnpbp-0002.md#deterministic-public-key-extraction-from-bitcoin-script>
+miniscript = { version = "=2.0.0", features = ["compiler"] }
 bitcoin = { version = "~0.25.0", branch = "develop", features = ["rand"] }
 torut = { version = "~0.1.5", features = ["v2", "v3"] }
 
