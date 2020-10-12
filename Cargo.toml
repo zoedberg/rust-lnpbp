@@ -1,6 +1,6 @@
 [package]
 name = "lnpbp"
-version = "0.1.0-rc.2"
+version = "0.1.0"
 license = "MIT"
 authors = ["Dr. Maxim Orlovsky <orlovsky@pandoracore.com>"]
 description = "LNP/BP Core Library implementing LNPBP specifications & standards"
@@ -35,7 +35,7 @@ crate-type = ["dylib", "rlib", "staticlib"]
 # -----------------------------------------
 amplify = "~1.2.0" # This project does not have any non-optional dependencies
 amplify_derive = "~1.2.0"
-lnpbp_derive = { path = "derive" }
+lnpbp_derive = "~1.0.0"
 # Dependencies on core rust-bitcoin ecosystem projects
 # ----------------------------------------------------
 bitcoin = { version = "~0.25.0", features = ["rand"] }
@@ -87,27 +87,6 @@ torut = { version = "~0.1.6", features = ["v2", "v3"] }
 [dev-dependencies]
 miniscript = { version = "~2.0.0", features = ["compiler"] }
 bitcoin = { version = "~0.25.0", features = ["rand"] }
-
-# Forked dependencies
-# -------------------
-# Some of the functionality required for
-# LNP/BP development related to the base Bitcoin protocol and Lightning Network
-# is contributed by LNP/BP Association directly into corresponding libraries;
-# however sometimes the present library requires changes in them that can't or
-# not yet accepted by the community. This brings necessity to maintain our own
-# forks of the dependencies. Sometimes upstream crates does not have any PRs
-# by LNP/BP, but we still need to patch them with importing underlying forked
-# versions (like `bitcoin` in `miniscript`), otherwise we are getting library
-# conflicts breaking compilation
-# NB: These patches MUST be applied in exactly same manner by any library which
-#     uses this as a dependency
-[patch.crates-io]
-# We need this b/c of breaking change in tagged hash type generation
-bitcoin_hashes = { git = "https://github.com/LNP-BP/bitcoin_hashes", tag = "lnpbp-v0.1.0-rc1" }
-bitcoin = { git = "https://github.com/LNP-BP/rust-bitcoin", tag = "lnpbp-v0.1.0-rc1" }
-# We need custom branches here just to depend on the same bitcoin master and do
-# not have secp256k1 version conflict
-miniscript = { git = "https://github.com/LNP-BP/rust-miniscript", tag = "lnpbp-v0.1.0-rc1" }
 
 # Features
 # ========
